@@ -6,16 +6,30 @@ const express = require('express');
 const flash = require("connect-flash");
 const session = require("express-session");
 const cookieParser = require('cookie-parser');
-const MongoClient = require('mongodb').MongoClient;
 const favicon = require("serve-favicon");
+const mongoose = require('mongoose');
+
+const app = express();
+
+
 
 // Connected to Cluster Atlas MongoDB
-const uri = process.env.MONGO_CONNECTION;
-const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
-client.connect(err => {
-  const collection = client.db("TechBlog").collection("AboutTech");
-  client.close();
-});
+const uri = process.env.MONGODB_URI
+mongoose
+  .connect(uri, {
+    useCreateIndex: true,
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useFindAndModify: false
+  })
+  .then(x => {
+    console.log(
+      `Connected to Mongo! Database name: "${x.connections[0].name}"`
+    );
+  })
+  .catch(err => {
+    console.error("Error connecting to mongo", err);
+  });
 
 // setup package.json
 const app_name = require("./package.json").name;
@@ -23,7 +37,7 @@ const debug = require("debug")(
   `${app_name}:${path.basename(__filename).split(".")[0]}`
 );
 
-const app = express();
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -43,6 +57,7 @@ app.use(
 );
 
 //  Set paths
+app.use(express.json({ extended: false }))
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "hbs");
 app.use(express.static(path.join(__dirname, "public")));
@@ -53,11 +68,9 @@ app.use(favicon(path.join(__dirname, "public", "images", "favicon.ico")));
 app.use(flash());
 
 // Routes
-const indexRouter = require('./routes/index');
-const usersRouter = require('./routes/users');
+const authUsersRouter = require('./routes/Users/AuthUsers');
 
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use('/', authUsersRouter);
 
 
 module.exports = app;

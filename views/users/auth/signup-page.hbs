@@ -1,6 +1,6 @@
 <h2>Signup</h2>
 
-<form class="auth-form" action="/users/auth/signup-page" method="POST" id="form-container">
+<form class="" action="/users/auth/signup-page" method="POST" id="form-container">
   <label for="firstName">Firstname</label>
   <input id="firstName" type="text" name="firstName" placeholder="Fisrtname">
 
@@ -16,15 +16,15 @@
   <input id="password" type="password" name="password" placeholder="Your password">
   <br>
   {{#if message }}
-  <div class="error-message">{{ message }}</div>
+  <div class="">{{ message }}</div>
   {{/if}}
 
   <br><br>
 
   <button>Create account</button>
 
-  <p class="account-message">
+  <p class="">
     Do you already have an account?
-    <a href="/views/users/auth/login-page">Login</a>
+    <a href="users/auth/login-page">Login</a>
   </p>
 </form>

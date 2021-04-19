@@ -4,9 +4,9 @@ const User = require("../../models/User")
 const bcrypt = require("bcrypt")
 const bSalt = 10
 
-// router.get("/", (req, res, next) => {
-//     res.render("users/auth/signup-page")
-// })
+router.get("/", (req, res, next) => {
+    res.render("users/auth/signup-page")
+})
 
 
 router.post("/signup", (req, res, next) => {
