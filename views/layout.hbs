@@ -8,22 +8,23 @@
 
 <body>
   <nav>
-    <div>
-      <a href="/">Home</a>
-      <a href="/boards">Boards</a>
-    </div>
-    <div>
-      {{#if currentUser}}
-      <span>Hi, {{ currentUser.username }}</span>
-      <a href="/users/profile"><img src={{currentUser.avatar}} alt="avatar"></a>
-      <a href="/auth/logout">Logout</a>
-      {{else}}
-      <a href="/login">Login</a>
-      <a href="/signup">Signup</a>
-      {{/if}}
-    </div>
+    <ul>
+      <li id="to-left">
+        <p><a href="/"> Your own library! </a></p>
+      </li>
+      <li id="to-right">
+        {{#if user}}
+        <form action="/logout" method="POST">
+          <button type="submit">Logout</button>
+        </form>
+        <a href="/profile"></a>
+        {{else}}
+        <a href="/signup">Signup</a> <span> | </span>
+        <a href="/login">Login</a>
+        {{/if}}
+      </li>
+    </ul>
   </nav>
-
   {{{body}}}
 </body>
 
