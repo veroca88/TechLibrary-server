@@ -8,6 +8,7 @@ const session = require("express-session");
 const cookieParser = require('cookie-parser');
 const favicon = require("serve-favicon");
 const mongoose = require('mongoose');
+const MongoStore = require("connect-mongo")(session);
 
 const app = express();
 
@@ -58,19 +59,28 @@ app.use(
 
 //  Set paths
 app.use(express.json({ extended: false }))
-app.set("views", path.join(__dirname, "views"));
-app.set("view engine", "hbs");
+app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, "public")));
 app.use(favicon(path.join(__dirname, "public", "images", "favicon.ico")));
 
 
 // session used for storing messages
+app.use(
+  session({
+    secret: "regenerator",
+    resave: true,
+    saveUninitialized: true,
+    store: new MongoStore({ mongooseConnection: mongoose.connection })
+  })
+);
 app.use(flash());
 
 // Routes
 const authUsersRouter = require('./routes/Users/AuthUsers');
+const principalTab = require('./routes/Tabs/principalTab');
 
 app.use('/', authUsersRouter);
+app.use('/', principalTab);
 
 
 module.exports = app;
