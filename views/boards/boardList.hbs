@@ -1,0 +1,14 @@
+<h1>Available Posts!!</h1>
+
+<a class="navbar-brand" href="/board-input">Create a Post!!</a>
+<br>
+
+<ul>
+    {{#each boards}}
+    <li> <a href="/boards/{{ this._id }}"> {{ this.title }}</a>
+        <form class="form-signin" action="/boards/{{this._id}}/delete" method="post">
+            <button class="navbar-brand" type="submit">Delete</button>
+        </form>
+    </li>
+    {{/each}}
+</ul>

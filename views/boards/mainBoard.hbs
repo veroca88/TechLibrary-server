@@ -1,0 +1,58 @@
+{{!-- <h1>Create a new Post</h1>
+
+<form action="/board" method="POST">
+    <label for="title"> Title </label>
+    <input type="text" name="title" id="title">
+    <br>
+
+    <label for="message"> Message </label>
+    <select name="message" id="message">
+        <option disable selected value=""></option>
+        {{#each availableUsers}}
+        <option value="{{this._id}}"> {{this.username}}</option>
+        {{/each}}
+    </select>
+    <br>
+
+    <label for="description-input"> Description </label>
+    <input type="text" name="description" id="description-input">
+    <br>
+
+    <label for="rating-input"> Rating </label>
+    <input type="number" name="rating" id="rating-input">
+
+    <button type="submit"> Save Post </button>
+</form> --}}
+
+
+<h1>Message Boards</h1>
+
+<form action="/boards" method="post">
+    <label for="titleInput"> Title </label>
+    <input id="titleInput" type="text" name="title">
+
+    <button> Create a Tech Post </button>
+</form>
+
+<div>
+    <ul>
+        {{#if noBoards}}
+
+        <p> There are no boards to display at this time. Be the first to create a new board! </p>
+
+        {{else}}
+
+        {{#each boards}}
+        <li>
+            <div class="board__board-names">
+                <a href="/boards/details/{{this._id}}">{{this.title}}</a>
+                {{#if this.isOwner}}
+                <form action="/boards/delete/{{this._id}}" method="POST"><button>X</button></form>
+                {{/if}}
+            </div>
+        </li>
+        {{/each}}
+
+        {{/if}}
+    </ul>
+</div>

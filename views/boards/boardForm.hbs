@@ -1,0 +1,46 @@
+<div class="container">
+    <div class="row">
+        <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+            <div class="card card-signin my-5">
+                <div class="card-body">
+                    <h5 class="card-title text-center">Create a Post</h5>
+
+                    <form class="form-signin" id="form" action="/boards" method="POST">
+                        <div class="form-label-group">
+                            <div class="form-label-group">
+                                <p>Title: </p>
+                                <input type="text" id="title" class="form-control" name="title" placeholder="title"
+                                    required>
+                                <label for="title"></label>
+                            </div>
+                            <div class="form-label-group">
+                                <p>Description: </p>
+                                <input type="text" id="description" class="form-control" name="description"
+                                    placeholder="Write some description..." required>
+                                <label for="description"></label>
+                            </div>
+
+                            <label for="type-select"> Programming Language </label>
+                            <select name="type" id="type-select">
+                                <option value=".Net">.Net</option>
+                                <option value="Python">Python</option>
+                                <option value="Kotlin">Kotlin</option>
+                                <option value="Java">Java</option>
+                                <option value="JavaScript">JavaScript</option>
+                                <option value="TypeScript">TypeScript</option>
+                                <option value="Go">Go</option>
+                                <option value="Swift">Swift</option>
+                                <option value="C#">C#</option>
+                                <option value="C++">C++</option>
+                                <option value="Other">Other</option>
+
+                            </select>
+
+
+                            <button class="btn btn-lg btn-warning btn-block" type="submit">Save the post</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
