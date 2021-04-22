@@ -10,14 +10,14 @@ const routeGuard = require('../../configs/route-guard.config')
 
 //SIGNUP ROUTES
 router.get("/signup", (req, res) => {
-    res.render("users/auth/signup-page")
+    res.render("auth/signup-page")
 })
 
 router.post("/signup", (req, res, next) => {
     const { firstName, lastName, username, email, password } = req.body;
 
     if (!firstName || !lastName || !username || !password || !email) {
-        res.render("users/auth/signup-page", {
+        res.render("auth/signup-page", {
             message: "All the field are required..."
         });
         return;
@@ -29,7 +29,7 @@ router.post("/signup", (req, res, next) => {
             return User.create({
                 firstName, lastName, username, email, password: hashedPasswd
             })
-                .then(user => res.render('users/auth/login-page', { user }))
+                .then(user => res.render('auth/login-page', { user }))
                 .catch(err => {
                     if (err instanceof mongoose.Error.ValidationError) {
                         res.status(500).render('/signup', { message: err.message });
@@ -49,27 +49,26 @@ router.post("/signup", (req, res, next) => {
 //LOGIN ROUTES
 
 router.get("/login", (req, res, next) => {
-    res.render("users/auth/login-page")
+    res.render("auth/login-page")
 })
 
 router.post("/login", (req, res, next) => {
     const { username, password } = req.body;
     if (!username || !password) {
-        res.render('users/auth/login-page', { message: 'All fields are mandatory. Please provide your both, username and password.' });
+        res.render('auth/login-page', { message: 'All fields are mandatory. Please provide your both, username and password.' });
         return;
     }
 
     User.findOne({ username })
         .then(user => {
             if (!user) {
-                res.render('/users/auth/login-page', { message: 'Username is not registered. Try with different username.' });
+                res.render('auth/login-page', { message: 'Username is not registered. Try with different username.' });
                 return;
             } else if (bcrypt.compareSync(password, user.password)) {
                 req.session.user = user;
-                console.log('==========')
                 res.render('users/profile', { user });
             } else {
-                res.render('/users/auth/login-page', { message: 'Incorrect password.' });
+                res.render('auth/login-page', { message: 'Incorrect password.' });
             }
         })
         .catch(err => next(err));
@@ -77,17 +76,24 @@ router.post("/login", (req, res, next) => {
 
 // LOGOUT ROUTE
 
-router.post('/logout', routeGuard, (req, res) => {
+router.post('/logout', (req, res) => {
     req.session.destroy();
     res.redirect('/');
 });
 
 // USER PROFILE
 router.get('/userProfile', routeGuard, (req, res) => {
-    console.log('USER IN SESSION: ', req.session.currentUser);
     res.render('users/profile');
 });
 
+// GET ALL USERS
+router.get('/allUsers', routeGuard, (req, res) => {
+    User.find()
+        .then(usersFromDB => {
+            res.render('users/theTeam', { users: usersFromDB });
+        })
+        .catch(err => console.log(`Error while getting authors from DB: ${err}`));
+});
 
 
 module.exports = router;
