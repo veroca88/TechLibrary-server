@@ -35,6 +35,8 @@ const userSchema = new Schema(
                 }
             ]
         },
+
+        //second step
         followingPosts: {
             type: [
                 {

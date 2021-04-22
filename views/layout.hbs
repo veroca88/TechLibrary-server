@@ -3,29 +3,60 @@
 
 <head>
   <title>{{title}}</title>
-  <link rel='stylesheet' href='/stylesheets/style.css' />
+  {{!-- Google fonts --}}
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap" rel="stylesheet">
+  <!-- ADD JQUERY CDN - BOOTSTRAP IS DEPENDENT ON IT SO HAS TO BE LOADED FIRST -->
+  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+    integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous">
+    </script> ​
+  <!-- ADD POPPER CDN - BOOTSTRAP IS DEPENDENT ON IT SO HAS TO BE LOADED FIRST -->
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+    crossorigin="anonymous"></script> ​
+  <!-- ADD BOOTSTRAP CSS CDN -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous" /> ​
+  <!-- ADD BOOTSTRAP JS CDN -->
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+    integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
+    </script>
+  <!-- ADD CLEAVE JS CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/cleave.js/1.5.3/cleave.min.js"></script> ​
+  <!-- STYLES TO THE DATATABLES CSS -->
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css">
+  <!-- Font Awesome -->
+  <script src="https://kit.fontawesome.com/4376a7f723.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="/stylesheets/style.css" />
 </head>
 
 <body>
-  <nav>
-    <ul>
-      <li id="to-left">
-        <p><a href="/"> Your own library! </a></p>
-      </li>
-      <li id="to-right">
-        {{#if user}}
-        <form action="/logout" method="POST">
-          <button type="submit">Logout</button>
-        </form>
-        <a href="/profile"></a>
-        {{else}}
-        <a href="/signup">Signup</a> <span> | </span>
-        <a href="/login">Login</a>
-        {{/if}}
-      </li>
-    </ul>
-  </nav>
-  {{{body}}}
+  <header>
+    <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
+      <div class="container">
+        <div id="to-left">
+          <a class="navbar-brand" href="/"> Tech Blog!! </a>
+        </div>
+        <div class="inline-option">
+          <a class="navbar-brand" href="/boards">Boards</a>
+          <a class="navbar-brand" href="/allUsers">The team</a>
+          <div>
+            {{#if user}}
+            <form action="/logout" method="POST">
+              <button type="submit">Logout</button>
+            </form>
+            {{else}}
+            <a class="navbar-brand" href="/signup">Signup</a>
+            <a class="navbar-brand" href="/login">Login</a>
+            {{/if}}
+          </div>
+        </div>
+      </div>
+    </nav>
+  </header>
+  <div class="principal-div">
+    {{{body}}}
+  </div>
 </body>
 
 </html>

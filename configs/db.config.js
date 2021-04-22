@@ -1,10 +1,10 @@
 require("dotenv").config();
 const mongoose = require('mongoose');
+const MONGODB_URI = process.env.MONGODB_URI
 
 // Connected to Cluster Atlas MongoDB
-const uri = process.env.MONGODB_URI
 mongoose
-    .connect(uri, {
+    .connect(MONGODB_URI, {
         useCreateIndex: true,
         useNewUrlParser: true,
         useUnifiedTopology: true,
@@ -18,3 +18,4 @@ mongoose
     .catch(err => {
         console.error("Error connecting to mongo", err);
     });
+
