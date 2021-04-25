@@ -1,0 +1,12 @@
+<h1> Details of: {{ post.title }} </h1>
+
+<h2>by {{ post.user.firstName }} {{ post.user.lastName }}</h2>
+
+<p><b>Description:</b>{{ post.description }}</p>
+
+<p><b>Rating: </b>{{ post.rating }}</p>
+<br>
+
+<a href="/boards/{{post._id}}/edit"> Edit </a>
+<br>
+<a href="/boards">Go to posts list page</a>
