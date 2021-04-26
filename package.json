@@ -8,7 +8,6 @@
   "dependencies": {
     "@dicebear/avatars": "^4.6.3",
     "@dicebear/avatars-bottts-sprites": "^4.6.3",
-    "axios": "^0.21.1",
     "bcryptjs": "^2.4.3",
     "connect-mongo": "^3.2.0",
     "cookie-parser": "~1.4.4",
