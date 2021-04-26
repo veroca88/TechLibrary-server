@@ -14,9 +14,9 @@ router.get("/signup", (req, res) => {
 })
 
 router.post("/signup", (req, res, next) => {
-    const { firstName, lastName, username, email, password } = req.body;
+    const { firstName, lastName, gender, username, email, password } = req.body;
 
-    if (!firstName || !lastName || !username || !password || !email) {
+    if (!firstName || !lastName || !gender || !username || !password || !email) {
         res.render("auth/signup-page", {
             message: "All the field are required..."
         });
@@ -27,7 +27,7 @@ router.post("/signup", (req, res, next) => {
         .then(salt => bcrypt.hash(password, salt))
         .then(hashedPasswd => {
             return User.create({
-                firstName, lastName, username, email, password: hashedPasswd
+                firstName, lastName, gender, username, email, password: hashedPasswd
             })
                 .then(user => res.render('auth/login-page', { user }))
                 .catch(err => {
@@ -87,8 +87,8 @@ router.get('/userProfile', routeGuard, (req, res) => {
 });
 
 // GET ALL USERS
-router.get('/allUsers', routeGuard, (req, res) => {
-    User.find()
+router.get('/allUsers', async (req, res) => {
+    await User.find()
         .then(usersFromDB => {
             res.render('users/theTeam', { users: usersFromDB });
         })
