@@ -13,7 +13,7 @@ const boardSchema = new Schema({
         ref: "User"
     },
     type: {
-        enum: ['.Net', 'Python', 'Kotlin', 'Java', 'JavaScript', 'TypeScript', 'Go', 'Swift', 'C#', 'C++', 'Other']
+        enum: ['.Net', 'PHP', 'Python', 'Kotlin', 'Java', 'JavaScript', 'TypeScript', 'Go', 'Swift', 'C#', 'C++', 'Other']
     },
     messages: {
         type: [

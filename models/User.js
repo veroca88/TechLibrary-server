@@ -16,6 +16,10 @@ const userSchema = new Schema(
             required: [true, 'Username is required.'],
             unique: true
         },
+        gender: {
+            type: String,
+            enum: ['female', 'male'],
+        },
         email: {
             type: String,
             required: [true, 'Email is required.'],
@@ -28,16 +32,6 @@ const userSchema = new Schema(
             required: [true, 'Password is required.']
         },
         userPosts: {
-            type: [
-                {
-                    type: Schema.Types.ObjectId,
-                    ref: "Board"
-                }
-            ]
-        },
-
-        //second step
-        followingPosts: {
             type: [
                 {
                     type: Schema.Types.ObjectId,
