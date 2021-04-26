@@ -31,14 +31,11 @@ const userSchema = new Schema(
             type: String,
             required: [true, 'Password is required.']
         },
-        userPosts: {
-            type: [
-                {
-                    type: Schema.Types.ObjectId,
-                    ref: "Board"
-                }
-            ]
-        },
+        // userPosts:
+        // {
+        //     type: Schema.Types.ObjectId,
+        //     ref: "Board"
+        // },
     },
     { timestamps: true }
 )

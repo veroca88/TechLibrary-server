@@ -7,25 +7,40 @@ const routeGuard = require('../../configs/route-guard.config')
 // DISPLAY FORM TO CREATE A BOARD
 
 router.get('/board-input', routeGuard, (req, res) => {
-    Board.find({ owner: req.session })
-        .then(currentBoard => {
-            res.render('boards/boardForm', { currentBoard });
-        })
-        .catch(err => console.log(`Err while displaying post input page: ${err}`));
-});
+    res.render('boards/boardForm');
+})
 
 // DISPLAY ALL BOARDS
 router.get("/boards", routeGuard, (req, res, next) => {
-    Board.find()
-        .then(boardsFromDB => res.render('boards/boardList', { boards: boardsFromDB }))
+    Board.find({ user: req.session.user._id })
+        .then(boardsFromDB => {
+            console.log("current boards", boardsFromDB);
+            if (!boardsFromDB) {
+                res.render('boards/boardList', {
+                    boards: boardsFromDB,
+                    message: "There is no post yet!"
+                });
+                return;
+            }
+            res.render('boards/boardList', { boards: boardsFromDB })
+        })
         .catch(err => console.log(`Err while getting the posts from the  DB: ${err}`));
 })
 
 // CREATE POST
 
 router.post('/boards', (req, res) => {
-    Board.create(req.body)
-        .then(savePost => {
+    const { title, description, type } = req.body
+    if (!title || !description || !type) {
+        res.render('/boards', {
+            message: 'Please fill up the form!!'
+        });
+        return;
+    }
+    const owner = req.session.user._id;
+
+    Board.create({ title, description, type, user: owner })
+        .then(() => {
             res.redirect('/boards')
         })
         .catch(err => console.log(`Err while saving the post in the DB: ${err}`));
@@ -52,8 +67,14 @@ router.get('/boards/:onePostId', (req, res) => {
 // UPDATE POST
 
 router.get('/boards/:id/edit', (req, res) => {
-    Board.findById(req.params.id)
+    Board.findOne({ user: req.session.user._id, _id: req.params.id })
         .then(foundPost => {
+            if (!foundPost) {
+                res.render('boards/boardEdit', {
+                    message: 'There is no Post to update'
+                });
+                return;
+            }
             res.render('boards/boardEdit', { post: foundPost })
         })
         .catch(err => console.log(`Err while getting the post from the  DB for the update: ${err}`));
@@ -62,7 +83,13 @@ router.get('/boards/:id/edit', (req, res) => {
 // SAVE THE UPDATES
 
 router.post('/boards/:id/update', (req, res) => {
-    console.log(req.body);
+    const { description, type } = req.body
+    if (!description || !type) {
+        res.render('boards/boardEdit', {
+            message: 'Please fill the form!'
+        });
+        return;
+    }
     Board.findByIdAndUpdate(req.params.id, req.body)
         .then(updatedPost => res.redirect(`/boards/${req.params.id}`))
         .catch(err => console.log(`Err while updating the specific post in the  DB: ${err}`))

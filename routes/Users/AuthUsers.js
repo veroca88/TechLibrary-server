@@ -64,8 +64,10 @@ router.post("/login", (req, res, next) => {
             if (!user) {
                 res.render('auth/login-page', { message: 'Username is not registered. Try with different username.' });
                 return;
-            } else if (bcrypt.compareSync(password, user.password)) {
+            }
+            if (bcrypt.compareSync(password, user.password)) {
                 req.session.user = user;
+                console.log("session login save user", req.session.user)
                 res.render('users/profile', { user });
             } else {
                 res.render('auth/login-page', { message: 'Incorrect password.' });

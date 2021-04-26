@@ -8,30 +8,12 @@ const boardSchema = new Schema({
     description: {
         type: String
     },
-    user: {
-        type: Schema.Types.ObjectId,
-        ref: "User"
-    },
     type: {
         enum: ['.Net', 'PHP', 'Python', 'Kotlin', 'Java', 'JavaScript', 'TypeScript', 'Go', 'Swift', 'C#', 'C++', 'Other']
     },
-    messages: {
-        type: [
-            {
-                type: Schema.Types.ObjectId,
-                ref: "Message"
-            }
-        ]
-    },
-
-    // second step
-    followers: {
-        type: [
-            {
-                type: Schema.Types.ObjectId,
-                ref: "User"
-            }
-        ]
+    user: {
+        type: Schema.Types.ObjectId,
+        ref: 'User'
     }
 },
     { timestamps: true }
