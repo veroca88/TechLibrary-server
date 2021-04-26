@@ -114,3 +114,21 @@ canvas {
   text-decoration: underline; 
 }
 
+.square {
+  position: relative;
+  width: 50%;
+}
+
+.square:after {
+  content: "";
+  display: block;
+  padding-bottom: 100%;
+}
+
+.content {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  margin: 10%;
+}
+

@@ -1,5 +1,14 @@
-<ul>
+</div>
+<div class="row">
     {{#each users}}
-    <li>{{ this.username }}</li>
+    <div class="square col col-lg-2">
+        <div class="card">
+            <img src="https://avatars.dicebear.com/api/{{gender}}/{{username}}.svg" class="img-fluid  card-img-top"
+                alt="avatar">
+            <div class="card-body">
+                <p class="card-text">{{username}}</p>
+            </div>
+        </div>
+    </div>
     {{/each}}
-</ul>
+</div>
