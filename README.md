@@ -16,6 +16,8 @@ CRUD (**C**reate, **R**ead, **U**pdate, **D**elete) are four basic operations of
 This app was built with: 
 
 **Back-end**
+- JavaScript
+- Node.js
 - Express
 - Express-session
 - MongoDB (connection with cluster Atlas)
@@ -25,7 +27,7 @@ This app was built with:
 
 
 **Front-end**
-- DiceBears (for the avatars)
+- [DiceBears](https://avatars.dicebear.com/) (for the avatars)
 - Handlebars
  
 ## 🏃‍♀️ Install 
