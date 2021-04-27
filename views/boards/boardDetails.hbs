@@ -1,12 +1,31 @@
-<h1> Details of: {{ post.title }} </h1>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+            <div class="card card-signin my-5">
+                <div class="card-body">
+                    <h4 class="card-title text-center">Details of: {{ post.title }}</h4>
+                    <div class="form-label-group">
+                        <div class="form-label-group">
+                            <h4>Title: </h4>
+                            <label for="title">{{post.title}}</label>
+                        </div>
+                        <div class="form-label-group">
+                            <h4>Description: </h4>
+                            <label class="box-description">{{ post.description }}
+                            </label>
+                        </div>
+                        <div class="form-label-group">
+                            <h4>Type: </h4>
+                            <label for="type">{{post.type}}</label>
+                        </div>
 
-<h2>by {{ post.user.firstName }} {{ post.user.lastName }}</h2>
+                        <a class="button-orange" href="/boards/{{post._id}}/edit"> Edit </a>
 
-<p><b>Description:</b>{{ post.description }}</p>
+                        <a class="button-silver" href="/boards">Go to posts list page</a>
 
-<p><b>Rating: </b>{{ post.rating }}</p>
-<br>
 
-<a href="/boards/{{post._id}}/edit"> Edit </a>
-<br>
-<a href="/boards">Go to posts list page</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

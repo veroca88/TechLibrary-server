@@ -51,3 +51,12 @@ $ npm start
 If you have some error when you are setting up MongoDB Atlas here is some help!!
 
  - https://dev.to/veroca88/set-up-mongodb-atlas-and-connect-with-node-js-avoid-mongooseerror-operation-x-findone-buffering-timed-out-after-10000ms-5dpi
+
+ ## 🍫 You want to try it 
+
+If you don't want to create a user by yourself you can login with:
+
+- Username: user
+- Password: user
+
+Also! go to **The team** section to see how many of us has been created an account 🍹
