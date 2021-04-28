@@ -2,12 +2,15 @@
 
 ## 🧐 Problem?
 
-Has it ever happened to you (as self-taught dev) when you found a good resource you open a new tab and keep that window open because someday you will need it... and then you have so many open tabs that you start to save it as a bookmark by finally that day arrives and you don't remember that you had saved those good resources... 🤔 !!
+Has it ever happened to you (as self-taught dev) when you find a good
+            resource and you open a new tab and keep that window open because someday you will need it... 
+            and then you have so many open tabs that you start to save it as a bookmark so when finally that 
+            day comes and you don't remember that you had saved those good resources...  🤔 !!
 
 ## 🖥️ Solution?
 
 Tech Library Helper is a good example to see and try different ways to operate and store data. 
-You can save any documentation, links of those important resource, give a title to remember them.
+You can save any text or links of those important resources, give a title to remember them.
 
 ## 🔩 Let's talk about the important things!
 

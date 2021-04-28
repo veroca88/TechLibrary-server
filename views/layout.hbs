@@ -3,6 +3,8 @@
 
 <head>
   <title>{{title}}</title>
+  {{!-- FONTAWESOME --}}
+  <script src="https://kit.fontawesome.com/05a8381518.js" crossorigin="anonymous"></script>
   {{!-- Google fonts --}}
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap" rel="stylesheet">
@@ -31,29 +33,69 @@
 </head>
 
 <body>
-  <header>
-    <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
-      <div class="container">
-        <div id="to-left">
-          <a class="navbar-brand" href="/"> Tech Blog!! </a>
-        </div>
-        <div class="inline-option">
-          <a class="navbar-brand" href="/boards">Boards</a>
-          <a class="navbar-brand" href="/allUsers">The team</a>
-          <div>
+
+  <section class="color-section" id="title">
+    <div class="container-fluid">
+
+      <!-- Nav Bar -->
+
+      <nav class="navbar navbar-expand-lg navbar-dark">
+
+        <a class="navbar-brand" href="/">Library Helper</a>
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="/boards">Board</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/allUsers">Community</a>
+            </li>
             {{#if user}}
             <form action="/logout" method="POST">
-              <button class="button-silver" type="submit">Logout</button>
+              <button class="logout-btn" type="submit">Logout</button>
             </form>
             {{else}}
-            <a class="navbar-brand" href="/signup">Signup</a>
-            <a class="navbar-brand" href="/login">Login</a>
+            <li class="nav-item">
+              <a class="nav-link" href="/signup">Signup</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/login">Login</a>
+            </li>
             {{/if}}
-          </div>
+          </ul>
+
+        </div>
+      </nav>
+
+
+
+      <!-- Title -->
+
+      {{!-- <div class="row">
+        <div class="col-lg-6">
+          <h1 class="big-heading">Meet new and interesting dogs nearby.</h1>
+          <button class="btn btn-dark btn-lg download-btn" type="button"><i class="fab fa-apple"></i>
+            Download</button>
+          <button class="btn btn-outline-light btn-lg download-btn" type="button"><i class="fab fa-linux"></i>
+            Download</button>
+        </div>
+
+        <div class="col-lg-6">
+          <img class="title-img" src="" alt="iphone-mockup">
         </div>
       </div>
-    </nav>
-  </header>
+
+    </div> --}}
+
+  </section>
+  {{!--
+  </header> --}}
   <div class="principal-div">
     {{{body}}}
   </div>
