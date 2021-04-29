@@ -3,22 +3,23 @@
         <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
             <div class="card card-signin my-5">
                 <div class="card-body">
-                    <h5 class="card-title text-center">Details of {{ post.title }}</h5>
+                    <h5 class="card-title text-center">Details of {{ post.category }}</h5>
                     <div class="form-label-group">
-                        <h5>Title </h5>
+                        <h5>Category </h5>
+                        <label class="box-description form-control">{{post.category}}</label>
+                    </div>
+                    <div class="form-label-group">
+                        <h5>URL / Link </h5>
                         <label class="box-description form-control">{{post.title}}
                         </label>
                     </div>
                     <div class="form-label-group">
-                        <h5>Description: </h5>
+                        <h5>Description </h5>
                         <label class="box-description form-control">{{
                             post.description }}
                         </label>
                     </div>
-                    <div class="form-label-group">
-                        <h5>Category: </h5>
-                        <label class="box-description form-control">{{post.category}}</label>
-                    </div>
+
                     <br />
                     <button class="btn btn-dark btn-lg download-btn" type="submit"><a href="/boards/{{post._id}}/edit">
                             Edit </a></button>

@@ -60,7 +60,7 @@ a:hover {
 
 .text-white {
   color: #fff;
-  font-size: 1.2rem;
+  font-family: 'Noto Sans JP', sans-serif !important;
 }
 
 /* Navigation Bar */
@@ -183,6 +183,10 @@ a:hover {
 
 .avatar {
   margin-top: 4%;
+}
+
+.form-control {
+  height: auto;
 }
 
 /* the Team page */

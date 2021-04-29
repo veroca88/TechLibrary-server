@@ -7,16 +7,20 @@
 
                     <form class="form-signin" id="form" action="/boards" method="POST">
                         <div class="form-label-group">
+
+                            {{!-- CATEGORY --}}
                             <div class="form-label-group">
                                 <label for="category">Category </label>
                                 <input type="text" id="category" class="form-control" name="category"
                                     placeholder="Category" required>
                             </div>
+                            {{!-- TITLE => URL / LINK --}}
                             <div class="form-label-group">
                                 <label for="title">URL / Link </label>
                                 <input type="text" id="title" class="form-control" name="title" placeholder="https://"
                                     required>
                             </div>
+                            {{!-- DESCRIPTION --}}
                             <div class="form-label-group">
                                 <label for="description">Description </label>
                                 <input type="text" id="description" class="form-control" name="description"

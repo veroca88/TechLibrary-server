@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 
 router.get("/", (req, res) => {
-    res.render("index", { title: "Tap Reminder" })
+    res.render("index", { title: "Memento" })
 })
 
 module.exports = router;

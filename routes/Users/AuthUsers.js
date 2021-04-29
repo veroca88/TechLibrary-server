@@ -22,28 +22,39 @@ router.post("/signup", (req, res, next) => {
         });
         return;
     }
-    bcrypt
-        .genSalt(saltRounds)
-        .then(salt => bcrypt.hash(password, salt))
-        .then(hashedPasswd => {
-            return User.create({
-                firstName, lastName, gender, username, email, password: hashedPasswd
-            })
-                .then(user => res.render('auth/login-page', { user }))
-                .catch(err => {
-                    if (err instanceof mongoose.Error.ValidationError) {
-                        res.status(500).render('/signup', { errMessage: err.message });
-                    } else if (err.code === 11000) {
-                        res.status(500).render('/signup', {
-                            errMessage: 'Username and email need to be unique. Either username or email is already used.'
-                        });
-                    } else {
-                        next(err);
-                    }
+
+    User.findOne({ username })
+        .then(user => {
+            if (user !== null) {
+                res.render("auth/signup-page", {
+                    errMessage: "The username already exists!"
                 });
-        })
-        .catch(err => next(err));
-});
+                return;
+            }
+
+            bcrypt
+                .genSalt(saltRounds)
+                .then(salt => bcrypt.hash(password, salt))
+                .then(hashedPasswd => {
+                    return User.create({
+                        firstName, lastName, gender, username, email, password: hashedPasswd
+                    })
+                        .then(user => res.render('auth/login-page', { user }))
+                        .catch(err => {
+                            if (err instanceof mongoose.Error.ValidationError) {
+                                res.status(500).render('/signup', { errMessage: err.message });
+                            } else if (err.code === 11000) {
+                                res.status(500).render('/signup', {
+                                    errMessage: 'Username and email need to be unique. Either username or email is already used.'
+                                });
+                            } else {
+                                next(err);
+                            }
+                        });
+                })
+                .catch(err => next(err));
+        });
+})
 
 
 //LOGIN ROUTES
@@ -55,14 +66,14 @@ router.get("/login", (req, res, next) => {
 router.post("/login", (req, res, next) => {
     const { username, password } = req.body;
     if (!username || !password) {
-        res.render('auth/login-page', { errMessage: 'All fields are mandatory. Please provide your both, username and password.' });
+        res.render('auth/login-page', { errMessage: 'All fields are mandatory. Please provide username and password.' });
         return;
     }
 
     User.findOne({ username })
         .then(user => {
             if (!user) {
-                res.render('auth/login-page', { errMessage: 'Username is not registered. Try with different username.' });
+                res.render('auth/login-page', { errMessage: 'Username is registered. Try with different username.' });
                 return;
             }
             if (bcrypt.compareSync(password, user.password)) {
