@@ -6,17 +6,18 @@
                     <h5 class="card-title text-center">Details of {{ post.title }}</h5>
                     <div class="form-label-group">
                         <h5>Title </h5>
-                        <label for="title">{{post.title}}
+                        <label class="box-description form-control">{{post.title}}
                         </label>
                     </div>
                     <div class="form-label-group">
                         <h5>Description: </h5>
-                        <label class="box-description">{{ post.description }}
+                        <label class="box-description form-control">{{
+                            post.description }}
                         </label>
                     </div>
                     <div class="form-label-group">
                         <h5>Category: </h5>
-                        <label for="type">{{post.category}}</label>
+                        <label class="box-description form-control">{{post.category}}</label>
                     </div>
                     <br />
                     <button class="btn btn-dark btn-lg download-btn" type="submit"><a href="/boards/{{post._id}}/edit">

@@ -1,7 +1,7 @@
 <div class="board container">
-    <h3 class="text-center">Available Posts</h3>
+    <h3 class="text-center">Your Reminder Board</h3>
 
-    <button class="btn btn-dark btn-lg download-btn" type="submit"><a href="/board-input">Create a Post</a></button>
+    <button class="btn btn-dark btn-lg download-btn" type="submit"><a href="/board-input">Create one</a></button>
     <br>
 
     <div class="cards mobile-card">
@@ -9,12 +9,14 @@
         {{#each boards}}
         <div class="card">
             <a class="list" href="/boards/{{ this._id }}">
-                <h2>{{ this.title }}</h2>
+                <h2>{{ this.category }}</h2>
+            </a>
+            <a class="list">
+                <h2>{{ this.description }}</h2>
             </a>
             <form class="form-signin" action="/boards/{{this._id}}/delete" method="post">
                 <button class="btn btn-dark btn-lg download-btn" type="submit">Delete</button>
             </form>
-
         </div>
         {{/each}}
     </div>

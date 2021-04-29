@@ -92,7 +92,9 @@ a:hover {
   cursor: pointer;
   margin-left: 7%;
 }
-
+ .btn {
+   margin: 2%;
+ }
 /* Error message */
 
 .errMessage {
