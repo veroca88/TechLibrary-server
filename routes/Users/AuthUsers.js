@@ -18,7 +18,7 @@ router.post("/signup", (req, res, next) => {
 
     if (!firstName || !lastName || !gender || !username || !password || !email) {
         res.render("auth/signup-page", {
-            message: "All the field are required..."
+            errMessage: "All the field are required..."
         });
         return;
     }
@@ -32,10 +32,10 @@ router.post("/signup", (req, res, next) => {
                 .then(user => res.render('auth/login-page', { user }))
                 .catch(err => {
                     if (err instanceof mongoose.Error.ValidationError) {
-                        res.status(500).render('/signup', { message: err.message });
+                        res.status(500).render('/signup', { errMessage: err.message });
                     } else if (err.code === 11000) {
                         res.status(500).render('/signup', {
-                            message: 'Username and email need to be unique. Either username or email is already used.'
+                            errMessage: 'Username and email need to be unique. Either username or email is already used.'
                         });
                     } else {
                         next(err);
@@ -55,22 +55,21 @@ router.get("/login", (req, res, next) => {
 router.post("/login", (req, res, next) => {
     const { username, password } = req.body;
     if (!username || !password) {
-        res.render('auth/login-page', { message: 'All fields are mandatory. Please provide your both, username and password.' });
+        res.render('auth/login-page', { errMessage: 'All fields are mandatory. Please provide your both, username and password.' });
         return;
     }
 
     User.findOne({ username })
         .then(user => {
             if (!user) {
-                res.render('auth/login-page', { message: 'Username is not registered. Try with different username.' });
+                res.render('auth/login-page', { errMessage: 'Username is not registered. Try with different username.' });
                 return;
             }
             if (bcrypt.compareSync(password, user.password)) {
                 req.session.user = user;
-                console.log("session login save user", req.session.user)
-                res.render('users/profile', { user });
+                res.render('boards/boardForm', { user });
             } else {
-                res.render('auth/login-page', { message: 'Incorrect password.' });
+                res.render('auth/login-page', { errMessage: 'Incorrect password.' });
             }
         })
         .catch(err => next(err));
@@ -83,8 +82,20 @@ router.post('/logout', (req, res) => {
     res.redirect('/');
 });
 
+// DELETE ACCOUNT
+
+router.post('/profile/:userId/delete', routeGuard, (req, res) => {
+    User.findByIdAndRemove(req.params.userId)
+        .then(() => {
+            req.session.destroy();
+            res.redirect("/")
+        })
+        .catch(err => console.log(`Err while deleting the user account from the  DB: ${err}`));
+});
+
+
 // USER PROFILE
-router.get('/userProfile', routeGuard, (req, res) => {
+router.get('/profile', routeGuard, (req, res) => {
     res.render('users/profile');
 });
 

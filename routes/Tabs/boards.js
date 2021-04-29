@@ -30,8 +30,8 @@ router.get("/boards", routeGuard, (req, res, next) => {
 // CREATE POST
 
 router.post('/boards', (req, res) => {
-    const { title, description, type } = req.body
-    if (!title || !description || !type) {
+    const { title, description, category } = req.body
+    if (!title || !description || !category) {
         res.render('/boards', {
             message: 'Please fill up the form!!'
         });
@@ -39,7 +39,7 @@ router.post('/boards', (req, res) => {
     }
     const owner = req.session.user._id;
 
-    Board.create({ title, description, type, user: owner })
+    Board.create({ title, description, category, user: owner })
         .then(() => {
             res.redirect('/boards')
         })
@@ -83,8 +83,8 @@ router.get('/boards/:id/edit', (req, res) => {
 // SAVE THE UPDATES
 
 router.post('/boards/:id/update', (req, res) => {
-    const { description, type } = req.body
-    if (!description || !type) {
+    const { title, description, category } = req.body
+    if (!title || !description || !category) {
         res.render('boards/boardEdit', {
             message: 'Please fill the form!'
         });

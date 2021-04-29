@@ -3,9 +3,16 @@
 
 <head>
   <title>{{title}}</title>
+  <meta name="viewport" content="width=device-width,height=device-height,initial-scale=1.0" />
   {{!-- FONTAWESOME --}}
   <script src="https://kit.fontawesome.com/05a8381518.js" crossorigin="anonymous"></script>
   {{!-- Google fonts --}}
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;400&family=Quicksand:wght@300;600&display=swap"
+    rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400&display=swap" rel="stylesheet">
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap" rel="stylesheet">
   <!-- ADD JQUERY CDN - BOOTSTRAP IS DEPENDENT ON IT SO HAS TO BE LOADED FIRST -->
@@ -41,7 +48,7 @@
 
       <nav class="navbar navbar-expand-lg navbar-dark">
 
-        <a class="navbar-brand" href="/">Library Helper</a>
+        <a class="navbar-brand" href="/">Tab Reminder</a>
 
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02">
           <span class="navbar-toggler-icon"></span>
@@ -58,8 +65,12 @@
             </li>
             {{#if user}}
             <form action="/logout" method="POST">
-              <button class="logout-btn" type="submit">Logout</button>
+              <button class="logout-btn nav-link" type="submit">Logout</button>
             </form>
+
+            <li class="nav-item">
+              <a class="nav-link" href="/profile">Profile</a>
+            </li>
             {{else}}
             <li class="nav-item">
               <a class="nav-link" href="/signup">Signup</a>
@@ -72,34 +83,10 @@
 
         </div>
       </nav>
-
-
-
-      <!-- Title -->
-
-      {{!-- <div class="row">
-        <div class="col-lg-6">
-          <h1 class="big-heading">Meet new and interesting dogs nearby.</h1>
-          <button class="btn btn-dark btn-lg download-btn" type="button"><i class="fab fa-apple"></i>
-            Download</button>
-          <button class="btn btn-outline-light btn-lg download-btn" type="button"><i class="fab fa-linux"></i>
-            Download</button>
-        </div>
-
-        <div class="col-lg-6">
-          <img class="title-img" src="" alt="iphone-mockup">
-        </div>
-      </div>
-
-    </div> --}}
-
   </section>
-  {{!--
-  </header> --}}
-  <div class="principal-div">
+  <div>
     {{{body}}}
   </div>
-  <footer>Made with ❤️ by Veronica Donoso</footer>
 </body>
 
 </html>

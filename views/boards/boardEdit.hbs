@@ -1,41 +1,28 @@
-<div class="container-fluid">
+<div class="container">
     <div class="row">
         <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
             <div class="card card-signin my-5">
                 <div class="card-body">
                     <h4 class="card-title text-center">Edit {{post.title}}</h4>
-
                     <form class="form-signin" id="form" action="/boards/{{post._id}}/update" method="POST">
                         <div class="form-label-group">
                             <div class="form-label-group">
-                                <h4>Title: </h4>
-                                <label for="title">{{post.title}}</label>
+                                <h5>Title </h5>
+                                <input type="text" id="title" class="form-control" name="title" value="{{post.title}}">
                             </div>
                             <div class="form-label-group">
-                                <h4>Description: </h4>
-                                <textarea rows="6" type="text" id="description" class="box-description form-control"
+                                <h5>Description </h5>
+                                <textarea rows="4" type="text" id="description" class="box-description form-control"
                                     name="description">{{post.description}}</textarea>
                             </div>
+                            <div class="form-label-group">
+                                <h5>Category </h5>
+                                <input type="text" id="category" class="form-control" name="category"
+                                    value="{{post.category}}">
+                            </div>
+                            <br />
+                            <button class="btn btn-dark btn-lg download-btn" type="submit">Save Updates</button>
 
-                            <label for="type-select"> Programming Language </label>
-                            <select name="type" id="type-select">
-                                <option value=".Net">.Net</option>
-                                <option value="Python">Python</option>
-                                <option value="Kotlin">Kotlin</option>
-                                <option value="Java">Java</option>
-                                <option value="JavaScript">JavaScript</option>
-                                <option value="TypeScript">TypeScript</option>
-                                <option value="Go">Go</option>
-                                <option value="Swift">Swift</option>
-                                <option value="C#">C#</option>
-                                <option value="C++">C++</option>
-                                <option value="PHP">PHP</option>
-                                <option value="Other">Other</option>
-
-                            </select>
-
-
-                            <button class="btn btn-lg btn-warning btn-block" type="submit">Save Updates</button>
                     </form>
                 </div>
             </div>

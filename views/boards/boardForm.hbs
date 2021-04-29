@@ -1,4 +1,4 @@
-<div class="container-fluid">
+<div class="container">
     <div class="row">
         <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
             <div class="card card-signin my-5">
@@ -8,36 +8,29 @@
                     <form class="form-signin" id="form" action="/boards" method="POST">
                         <div class="form-label-group">
                             <div class="form-label-group">
-                                <p>Title: </p>
+                                <label for="title">Title </label>
                                 <input type="text" id="title" class="form-control" name="title" placeholder="title"
                                     required>
-                                <label for="title"></label>
                             </div>
                             <div class="form-label-group">
-                                <p>Description: </p>
+                                <label for="description">Description </label>
                                 <input type="text" id="description" class="form-control" name="description"
-                                    placeholder="Write some description..." required>
-                                <label for="description"></label>
+                                    placeholder="URL..." required>
+                            </div>
+                            <div class="form-label-group">
+                                <label for="category">Category </label>
+                                <input type="text" id="category" class="form-control" name="category"
+                                    placeholder="Category" required>
                             </div>
 
-                            <label for="type-select"> Programming Language </label>
-                            <select name="type" id="type-select">
-                                <option value=".Net">.Net</option>
-                                <option value="Python">Python</option>
-                                <option value="Kotlin">Kotlin</option>
-                                <option value="Java">Java</option>
-                                <option value="JavaScript">JavaScript</option>
-                                <option value="TypeScript">TypeScript</option>
-                                <option value="Go">Go</option>
-                                <option value="Swift">Swift</option>
-                                <option value="C#">C#</option>
-                                <option value="C++">C++</option>
-                                <option value="Other">Other</option>
 
-                            </select>
-
-
-                            <button class="btn btn-lg btn-warning btn-block" type="submit">Save the post</button>
+                            <hr class="my-4">
+                            {{#if errMessage}}
+                            <div class="errMessage">{{ errMessage }}</div>
+                            {{/if}}
+                            <button class="btn btn-dark btn-lg download-btn" type="button"><a href="/boards">Go to
+                                    Boards</a></button>
+                            <button class="btn btn-dark btn-lg download-btn" type="submit">Save Post</button>
                     </form>
                 </div>
             </div>

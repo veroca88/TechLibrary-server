@@ -1,36 +1,5 @@
-{{!-- <h1>Profile</h1>
-
 {{#if user}}
-<img src="" class="profile-img center">
-<br>
-<h1>{{user.username}}'s Profile</h1>
-<p>Here is some info of your account!!</p>
-
-
-
-<div class="form-row justify-content-center">
-    <div class="form-group col-md-4">
-        <label>First Name</label>
-        <label class="form-control">{{user.firstName}}</label>
-    </div>
-    <div class="form-group col-md-4">
-        <label>Last Name</label>
-        <label class="form-control">{{user.lastName}}</label>
-    </div>
-</div>
-<div class="form-row justify-content-center">
-    <div class="form-group col-md-8">
-        <label>Email</label>
-        <label class="form-control">{{user.email}}</label>
-    </div>
-</div>
-
-{{else}}
-<p>Still no logged in user, sorry!</p>
-{{/if}} --}}
-
-{{#if user}}
-<div class="container-fluid">
+<div class="container">
     <div class="row">
         <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
             <div class="card card-signin my-5">
@@ -49,8 +18,12 @@
                     {{#if message}}
                     <div class="error-message">{{ message }}</div>
                     {{/if}}
-                    <a class="btn btn-lg btn-warning btn-block" href="/">Back Home</a>
-                    <br>
+                    <button class="btn btn-dark btn-lg download-btn" type="button"><a href="/">Back Home</a></button>
+                    <br />
+                    <form action="/profile/{{user._id}}/delete" method="POST">
+                        <button class="delete-acc btn btn-dark btn-lg download-btn" type="submit">Delete
+                            account</button>
+                    </form>
                 </div>
             </div>
         </div>

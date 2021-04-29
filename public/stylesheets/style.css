@@ -4,12 +4,14 @@ html,
 }
 
 body {
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'Open Sans', sans-serif;
   text-align: center;
+  min-height: auto;
+  position: relative;
 }
 
-h1, h2, h3, h4 {
-  font-family: 'Days One', sans-serif;
+h1, h2, h3, h4, h5 {
+  font-family: 'Montserrat', sans-serif;
 
 }
 
@@ -17,10 +19,19 @@ p {
   color: #8f8f8f;
 }
 
+a { 
+  color: inherit; 
+} 
+
+a:hover { 
+  color: inherit; 
+  text-decoration: none;
+} 
+
 /* Headings */
 
 .big-heading {
-  font-family: 'Days One', sans-serif;
+  font-family: 'Montserrat', sans-serif;
   font-size: 3.5rem;
   line-height: 1.5;
 }
@@ -59,7 +70,7 @@ p {
 }
 
 .navbar-brand {
-  font-family: 'Ubuntu', sans-serif;
+  font-family: 'Montserrat', sans-serif;
   font-size: 2.5rem;
   font-weight: bold;
 }
@@ -75,23 +86,22 @@ p {
 /* Logout Button */
 
 .logout-btn {
-	background-color:#059184;
-	border-radius:8px;
-	display:inline-block;
-	cursor:pointer;
-	color:#ffffff;
-	font-weight:bold;
-	padding:5px 32px;
-	text-decoration:none;
-	/* text-shadow:#3d768a; */
+  background: none!important;
+  border: none;
+  text-decoration: none;
+  cursor: pointer;
+  margin-left: 7%;
 }
-.logout-btn:hover {
-	background-color: #46dbb1;
-}
-.logout-btn:active {
-	position:relative;
-	top:1px;
-}
+
+/* Error message */
+
+.errMessage {
+  background: #f02b63;
+  box-sizing: border-box;
+  color: #fff;
+  margin: 20px auto;
+  padding: 20px;
+  width: 100%; }
 
 /* Title Section */
 
@@ -105,30 +115,103 @@ p {
 .title-img {
   width: 80%;
   text-align: center;
+  padding-bottom: 4%;
 }
 
-/* Features Section*/
+/* Info Section*/
 
-#features {
+#info {
   position: relative;
 }
 
-.feature-title {
+.info-title {
   font-size: 1.5rem;
 }
 
-.box-feature {
+.box-info {
   padding: 5%;
 }
 
-.icon-feature {
+.icon-info {
   color: #46dbb1;
   margin-bottom: 1rem;
+  margin: 20px 10px;
 }
 
-.icon-feature:hover {
+.icon-info:hover {
   color: #059184;
 }
+
+/* how-it-work Section */
+
+#how-it-workss {
+  background-color: #ef8172;
+  color: #fff;
+}
+
+.how-it-works-img {
+  width: 10%;
+  border-radius: 100%;
+  margin: 20px;
+}
+
+.how-it-works-text {
+  font-size: 3rem;
+  line-height: 1.5;
+}
+
+/* Footer Section */
+
+#footer {
+  background-color: #fff;
+}
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  font-size: .9rem;
+}
+
+/* Form */
+
+.form {
+  text-align: left;
+}
+
+.avatar {
+  margin-top: 4%;
+}
+
+/* the Team page */
+
+.cards {
+  margin-top: 5%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 1rem;
+}
+
+.card {
+  border: 2px solid #059184;
+  border-radius: 4px;
+  padding: .5rem;
+}
+
+/* Board List Section */
+.board {
+  margin-top: 4%;
+}
+
+/* Profile Section */
+
+.delete-acc {
+  background: #f02b63;
+  color: #fff;
+  margin-top: 4%;
+}
+
+
 
 @media (max-width: 1028px) {
   #title {
@@ -137,5 +220,17 @@ p {
   .title-img {
     height: 80%;
     width: inherit;
+  }
+
+  .how-it-works-text{
+    font-size: 1.5rem;
+  }
+  
+  .card-text {
+    font-size: .8rem;
+  }
+
+  .mobile-card {
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   }
 }

@@ -8,8 +8,8 @@ const boardSchema = new Schema({
     description: {
         type: String
     },
-    type: {
-        enum: ['.Net', 'PHP', 'Python', 'Kotlin', 'Java', 'JavaScript', 'TypeScript', 'Go', 'Swift', 'C#', 'C++', 'Other']
+    category: {
+        type: String
     },
     user: {
         type: Schema.Types.ObjectId,
