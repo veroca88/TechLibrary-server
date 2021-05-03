@@ -5,16 +5,6 @@ const boardSchema = new Schema({
     url: {
         type: String
     },
-    urlTitle: {
-        type: String
-    },
-    urlScreenshot: {
-        data: Buffer,
-        type: String
-    },
-    urlDescription: {
-        type: String
-    },
     description: {
         type: String
     },

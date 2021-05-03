@@ -3,40 +3,7 @@ const router = express.Router();
 const Board = require("../../models/Board");
 const User = require("../../models/User");
 const routeGuard = require('../../configs/route-guard.config')
-const xpath = require('xpath')
-const axios = require('axios')
-const { DOMParser } = require('xmldom')
 
-// GET TITLE DESCRIPTION AND IMAGE FROM OG OPEN GRAPH SCRAPER
-
-const xpaths = {
-    title: 'string(//meta[@property="og:title"]/@content)',
-    description: 'string(//meta[@property="og:description"]/@content)',
-    image: 'string(//meta[@property="og:image"]/@content)'
-}
-
-const retrievePage = url => axios.request({ url })
-const convertBodyToDoc = body => new DOMParser().parseFromString(body)
-const nodesFromDoc = (document, xpathselector) => xpath.select(xpathselector, document);
-const mapProps = (paths, document) =>
-    Object.keys(paths).reduce((acc, key) =>
-        ({ ...acc, [key]: nodesFromDoc(document, paths[key]) }), {});
-
-const parseUrl = url =>
-    retrievePage(url)
-        .then((response) => {
-            const document = convertBodyToDoc(response.data)
-            const mappedProperties = mapProps(xpaths, document)
-            return mappedProperties;
-        })
-
-// POST TITLE DESCRIPTION AND IMAGE FROM OG OPEN GRAPH SCRAPER
-
-router.post('/scrape', (req, res) => {
-    const { url } = req.body
-    return parseUrl(url)
-        .then((result) => res.json({ result }))
-})
 
 // DISPLAY FORM TO CREATE A BOARD
 
@@ -66,6 +33,7 @@ router.get("/boards", routeGuard, (req, res, next) => {
 router.post('/boards', (req, res) => {
 
     const { url, description, category } = req.body
+
     if (!url || !description || !category) {
         res.render('/boards', {
             message: 'Please fill up the form!!'
@@ -75,7 +43,6 @@ router.post('/boards', (req, res) => {
 
     const owner = req.session.user._id;
 
-    //  urlTitle: currentURLtitle, urlScreenshot: currentURLimage, urlDescription: currentURLdescription
     Board.create({ url, description, category, user: owner })
         .then(() => {
             res.redirect('/boards')
@@ -122,8 +89,8 @@ router.get('/boards/:id/edit', (req, res) => {
 // SAVE THE UPDATES
 
 router.post('/boards/:id/update', (req, res) => {
-    const { title, description, category } = req.body
-    if (!title || !description || !category) {
+    const { url, description, category } = req.body
+    if (!url || !description || !category) {
         res.render('boards/boardEdit', {
             message: 'Please fill the form!'
         });
