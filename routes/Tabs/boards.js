@@ -3,6 +3,40 @@ const router = express.Router();
 const Board = require("../../models/Board");
 const User = require("../../models/User");
 const routeGuard = require('../../configs/route-guard.config')
+const xpath = require('xpath')
+const axios = require('axios')
+const { DOMParser } = require('xmldom')
+
+// GET TITLE DESCRIPTION AND IMAGE FROM OG OPEN GRAPH SCRAPER
+
+const xpaths = {
+    title: 'string(//meta[@property="og:title"]/@content)',
+    description: 'string(//meta[@property="og:description"]/@content)',
+    image: 'string(//meta[@property="og:image"]/@content)'
+}
+
+const retrievePage = url => axios.request({ url })
+const convertBodyToDoc = body => new DOMParser().parseFromString(body)
+const nodesFromDoc = (document, xpathselector) => xpath.select(xpathselector, document);
+const mapProps = (paths, document) =>
+    Object.keys(paths).reduce((acc, key) =>
+        ({ ...acc, [key]: nodesFromDoc(document, paths[key]) }), {});
+
+const parseUrl = url =>
+    retrievePage(url)
+        .then((response) => {
+            const document = convertBodyToDoc(response.data)
+            const mappedProperties = mapProps(xpaths, document)
+            return mappedProperties;
+        })
+
+// POST TITLE DESCRIPTION AND IMAGE FROM OG OPEN GRAPH SCRAPER
+
+router.post('/scrape', (req, res) => {
+    const { url } = req.body
+    return parseUrl(url)
+        .then((result) => res.json({ result }))
+})
 
 // DISPLAY FORM TO CREATE A BOARD
 
@@ -14,7 +48,6 @@ router.get('/board-input', routeGuard, (req, res) => {
 router.get("/boards", routeGuard, (req, res, next) => {
     Board.find({ user: req.session.user._id })
         .then(boardsFromDB => {
-            console.log("current boards", boardsFromDB);
             if (!boardsFromDB) {
                 res.render('boards/boardList', {
                     boards: boardsFromDB,
@@ -22,6 +55,7 @@ router.get("/boards", routeGuard, (req, res, next) => {
                 });
                 return;
             }
+
             res.render('boards/boardList', { boards: boardsFromDB })
         })
         .catch(err => console.log(`Err while getting the posts from the  DB: ${err}`));
@@ -30,20 +64,24 @@ router.get("/boards", routeGuard, (req, res, next) => {
 // CREATE POST
 
 router.post('/boards', (req, res) => {
-    const { title, description, category } = req.body
-    if (!title || !description || !category) {
+
+    const { url, description, category } = req.body
+    if (!url || !description || !category) {
         res.render('/boards', {
             message: 'Please fill up the form!!'
         });
         return;
     }
+
     const owner = req.session.user._id;
 
-    Board.create({ title, description, category, user: owner })
+    //  urlTitle: currentURLtitle, urlScreenshot: currentURLimage, urlDescription: currentURLdescription
+    Board.create({ url, description, category, user: owner })
         .then(() => {
             res.redirect('/boards')
         })
         .catch(err => console.log(`Err while saving the post in the DB: ${err}`));
+
 })
 
 // DELETE POST
@@ -57,6 +95,7 @@ router.post('/boards/:boardId/delete', (req, res) => {
 // SHOW POST DETAILS
 
 router.get('/boards/:onePostId', (req, res) => {
+
     Board.findById(req.params.onePostId)
         .then(postFound => {
             res.render('boards/boardDetails', { post: postFound });

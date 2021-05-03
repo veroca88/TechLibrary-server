@@ -9,11 +9,27 @@
         {{#each boards}}
         <div class="card">
             <a class="list" href="/boards/{{ this._id }}">
-                <h2>{{ this.category }}</h2>
+                <h2 class="title-link">{{ this.category }}</h2>
             </a>
             <a class="list">
                 <h2>{{ this.description }}</h2>
             </a>
+
+
+            {{!-- DESCRIPTION CARD --}}
+            {{!-- <div class="card" style="width: 18rem;">
+                <img src="..." class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">Card title</h5>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                        card's content.</p>
+                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                </div>
+            </div> --}}
+            {{!-- END OF CARD --}}
+
+
+
             <form class="form-signin" action="/boards/{{this._id}}/delete" method="post">
                 <button class="btn btn-dark btn-lg download-btn" type="submit">Delete</button>
             </form>

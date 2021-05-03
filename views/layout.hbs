@@ -3,7 +3,13 @@
 
 <head>
   <title>{{title}}</title>
+  {{!-- MOBILE RESPONSIVE --}}
   <meta name="viewport" content="width=device-width,height=device-height,initial-scale=1.0" />
+  {{!-- OPEN GRAPH --}}
+  <meta property="og:title" content="Memento - Tab Reminder; Tool to be organize and stay productive" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="/static/website-social-card-44070c4a901df708aa1563ac4bbe595a.jpg" />
+  <meta property="og:url" content="https://www.sobretodotech.com" />
   {{!-- FONTAWESOME --}}
   <script src="https://kit.fontawesome.com/05a8381518.js" crossorigin="anonymous"></script>
   {{!-- Google fonts --}}
@@ -89,6 +95,7 @@
   <div>
     {{{body}}}
   </div>
+  <script src="/javascripts/scraper.js"></script>
 </body>
 
 </html>

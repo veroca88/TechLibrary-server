@@ -16,10 +16,11 @@
                             </div>
                             {{!-- TITLE => URL / LINK --}}
                             <div class="form-label-group">
-                                <label for="title">URL / Link </label>
-                                <input type="text" id="title" class="form-control" name="title" placeholder="https://"
+                                <label for="url">URL / Link </label>
+                                <input type="text" id="url" class="form-control" name="url" placeholder="https://"
                                     required>
                             </div>
+
                             {{!-- DESCRIPTION --}}
                             <div class="form-label-group">
                                 <label for="description">Description </label>
@@ -39,6 +40,23 @@
                     </form>
                 </div>
             </div>
+        </div>
+    </div>
+    <div class="row">
+        {{!-- DESCRIPTION OF LINK --}}
+
+        <div id="result" class="card" style="width: 18rem;">
+            {{!-- <img src="..." class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">Card title</h5>
+                <p class="card-text">Some quick example text to build on the card title and make up
+                    the bulk of the card's content.</p>
+                <a href="#" class="btn btn-primary">Go somewhere</a>
+            </div> --}}
+        </div>
+        <div class="row">
+            <button class=" btn-primary invisible" id="copyToClipboard">Copy</button>
+
         </div>
     </div>
 </div>

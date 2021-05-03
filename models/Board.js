@@ -2,7 +2,17 @@ const mongoose = require("mongoose");
 const { Schema, model } = mongoose;
 
 const boardSchema = new Schema({
-    title: {
+    url: {
+        type: String
+    },
+    urlTitle: {
+        type: String
+    },
+    urlScreenshot: {
+        data: Buffer,
+        type: String
+    },
+    urlDescription: {
         type: String
     },
     description: {
